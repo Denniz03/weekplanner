@@ -4,7 +4,7 @@
     $title = 'Weekplanner';
     $today = date('d-m-Y');
     $version = 'Versie 2.0';
-    $days = array('monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday');
+    $days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday');
     $year = date('Y');
     $week = date('W');
 
@@ -36,14 +36,14 @@
     }
 
     //SCHEDULE
-    $tables = array(
-        array('monday', 'tshirt', 'toothbrush', 'bread-loaf', 'bus', 'chalkboard-teacher', 'bus', 'house', 'shapes', 'running', 'utensils', 'dog', 'shower', 'bed'),
-        array('tuesday', 'tshirt', 'toothbrush', 'bread-loaf', 'bus', 'chalkboard-teacher', 'bus', 'house', 'shapes', 'utensils', 'dog', 'toothbrush', 'bed'),
-        array('wednesday', 'tshirt', 'toothbrush', 'bread-loaf', 'bus', 'chalkboard-teacher', 'bus', 'house', 'shapes', 'running', 'utensils', 'dog', 'shower', 'bed'),
-        array('thursday', 'bread-loaf', 'chalkboard-teacher', 'tshirt', 'bicycle', 'utensils', 'gamepad', 'shapes', 'bread-loaf', 'dog', 'shower', 'bed-alt'),
-        array('friday', 'bread-loaf', 'chalkboard-teacher', 'gamepad', 'tshirt', 'running', 'bread-loaf', 'gamepad', 'shapes', 'utensils', 'dog', 'shower', 'bed-alt'),
-        array('saturday', 'tshirt', 'toothbrush', 'bread-loaf', 'car', 'female', 'car', 'house', 'shapes', 'utensils', 'dog', 'toothbrush', 'bed-alt'),
-        array('sunday', 'gamepad', 'bread-loaf', 'tv', 'bread-loaf', 'tshirt', 'dog', 'shapes', 'shapes', 'utensils', 'dog', 'shower', 'bed'),
+    $tables = [
+        ['monday', 'tshirt', 'toothbrush', 'bread-loaf', 'bus', 'chalkboard-teacher', 'bus', 'house', 'shapes', 'running', 'utensils', 'dog', 'shower', 'bed'],
+        ['tuesday', 'tshirt', 'toothbrush', 'bread-loaf', 'bus', 'chalkboard-teacher', 'bus', 'house', 'shapes', 'utensils', 'dog', 'toothbrush', 'bed'],
+        ['wednesday', 'tshirt', 'toothbrush', 'bread-loaf', 'bus', 'chalkboard-teacher', 'bus', 'house', 'shapes', 'running', 'utensils', 'dog', 'shower', 'bed'],
+        ['thursday', 'bread-loaf', 'chalkboard-teacher', 'tshirt', 'bicycle', 'utensils', 'gamepad', 'shapes', 'bread-loaf', 'dog', 'shower', 'bed-alt'],
+        ['friday', 'bread-loaf', 'chalkboard-teacher', 'gamepad', 'tshirt', 'running', 'bread-loaf', 'gamepad', 'shapes', 'utensils', 'dog', 'shower', 'bed-alt'],
+        ['saturday', 'tshirt', 'toothbrush', 'bread-loaf', 'car', 'female', 'car', 'house', 'shapes', 'utensils', 'dog', 'toothbrush', 'bed-alt'],
+        ['sunday', 'gamepad', 'bread-loaf', 'tv', 'bread-loaf', 'tshirt', 'dog', 'shapes', 'shapes', 'utensils', 'dog', 'shower', 'bed'],
     );
 
     // COLOR
@@ -85,7 +85,7 @@
         <link rel="apple-touch-icon" href="weekplanner.png">
         <link rel="shortcut icon" sizes="128x128" href="weekplanner.png">
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-        <link href="fontawesome/css/all.css" rel="stylesheet">
+        <link href="https://www.denniz03.nl/fontawesome/css/all.css" rel="stylesheet">
         <link href="//db.onlinewebfonts.com/c/3cff9206b4c8d578245ef1aaeeaf9e84?family=SF+Pro+Display" rel="stylesheet" type="text/css"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <style>
@@ -98,8 +98,8 @@
                 --text-color: rgba(15, 15, 25, 0.75);
                 --text-light: rgba(15, 15, 25, 0.25);
                 --color: <?= $user_color ?>;
-                --accent-color: rgba(var(--color), 1);
-                --accent-light: rgba(var(--color), 0.2);
+                --accent-color: rgba(var(--color], 1);
+                --accent-light: rgba(var(--color], 0.2);
                 --overlay-color: rgba(42, 42, 47, 0.2);
                 --border-color: rgba(139, 139, 140, 0.5);
             }
@@ -130,8 +130,8 @@
                 .top {box-shadow: 0px 0px 10px var(--overlay-color)}
                 .bottom {box-shadow: 0px 0px 10px var(--overlay-color)}
 
-            @font-face {font-family: "SF Pro Bold"; src: url("//db.onlinewebfonts.com/t/3cff9206b4c8d578245ef1aaeeaf9e84.eot"); src: url("//db.onlinewebfonts.com/t/3cff9206b4c8d578245ef1aaeeaf9e84.eot?#iefix") format("embedded-opentype"), url("//db.onlinewebfonts.com/t/3cff9206b4c8d578245ef1aaeeaf9e84.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/3cff9206b4c8d578245ef1aaeeaf9e84.woff") format("woff"), url("//db.onlinewebfonts.com/t/3cff9206b4c8d578245ef1aaeeaf9e84.ttf") format("truetype"), url("//db.onlinewebfonts.com/t/3cff9206b4c8d578245ef1aaeeaf9e84.svg#SF Pro Display") format("svg"); }
-            @font-face {font-family: "SF Pro Regular"; src: url("//db.onlinewebfonts.com/t/0b51833ff62e4af8acb5fd3e2bf59e97.eot"); src: url("//db.onlinewebfonts.com/t/0b51833ff62e4af8acb5fd3e2bf59e97.eot?#iefix") format("embedded-opentype"), url("//db.onlinewebfonts.com/t/0b51833ff62e4af8acb5fd3e2bf59e97.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/0b51833ff62e4af8acb5fd3e2bf59e97.woff") format("woff"), url("//db.onlinewebfonts.com/t/0b51833ff62e4af8acb5fd3e2bf59e97.ttf") format("truetype"), url("//db.onlinewebfonts.com/t/0b51833ff62e4af8acb5fd3e2bf59e97.svg#SF Pro Display") format("svg"); }
+            @font-face {font-family: "SF Pro Bold"; src: url("//db.onlinewebfonts.com/t/3cff9206b4c8d578245ef1aaeeaf9e84.eot"); src: url("//db.onlinewebfonts.com/t/3cff9206b4c8d578245ef1aaeeaf9e84.eot?#iefix") format("embedded-opentype"], url("//db.onlinewebfonts.com/t/3cff9206b4c8d578245ef1aaeeaf9e84.woff2") format("woff2"], url("//db.onlinewebfonts.com/t/3cff9206b4c8d578245ef1aaeeaf9e84.woff") format("woff"], url("//db.onlinewebfonts.com/t/3cff9206b4c8d578245ef1aaeeaf9e84.ttf") format("truetype"], url("//db.onlinewebfonts.com/t/3cff9206b4c8d578245ef1aaeeaf9e84.svg#SF Pro Display") format("svg"); }
+            @font-face {font-family: "SF Pro Regular"; src: url("//db.onlinewebfonts.com/t/0b51833ff62e4af8acb5fd3e2bf59e97.eot"); src: url("//db.onlinewebfonts.com/t/0b51833ff62e4af8acb5fd3e2bf59e97.eot?#iefix") format("embedded-opentype"], url("//db.onlinewebfonts.com/t/0b51833ff62e4af8acb5fd3e2bf59e97.woff2") format("woff2"], url("//db.onlinewebfonts.com/t/0b51833ff62e4af8acb5fd3e2bf59e97.woff") format("woff"], url("//db.onlinewebfonts.com/t/0b51833ff62e4af8acb5fd3e2bf59e97.ttf") format("truetype"], url("//db.onlinewebfonts.com/t/0b51833ff62e4af8acb5fd3e2bf59e97.svg#SF Pro Display") format("svg"); }
 
             * {margin: 0px; padding: 0px; font-size: calc(720px / 21); color: var(--text-light)}
             body::-webkit-scrollbar {display: none}
@@ -278,13 +278,13 @@
                 <div class="cell"><a onclick="$('.sub-menu').toggle().animate({bottom:'0px'}); $('.overlay').fadeToggle(); $('body').toggleClass('fixed');"><div class="button"><i style="background-image: url('images/<?= $user_username ?>.jpg')" class="fas fa-photo">&nbsp;</i></div></a></div>
             </div>
             <div class="top-tabbar">
-                <div class="cell days"><div class="day">ma</div></div>
-                <div class="cell days"><div class="day">di</div></div>
-                <div class="cell days"><div class="day">wo</div></div>
-                <div class="cell days"><div class="day">do</div></div>
-                <div class="cell days"><div class="day">vr</div></div>
-                <div class="cell days"><div class="day">za</div></div>
-                <div class="cell days"><div class="day">zo</div></div>
+                <div class="day">ma</div></div>
+                <div class="day">di</div></div>
+                <div class="day">wo</div></div>
+                <div class="day">do</div></div>
+                <div class="day">vr</div></div>
+                <div class="day">za</div></div>
+                <div class="day">zo</div></div>
             </div>
             <div class="top-tabbar">
             <?php $i = 1; foreach ($days as $day) { ?>
