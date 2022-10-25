@@ -1,5 +1,5 @@
 <?php
-    $title = 'Weekplanner';
+    $title = 'KiddoApp';
     $today = date('d-m-Y');
     $version = 'Versie 2.0';
     $days = [
@@ -130,6 +130,10 @@
                 margin: 0px;
                 padding: 0px;
             }
+            body {
+                display: flex;
+                flex-direction: column;
+            }
             .overlay {
                 display: none; 
                 position: fixed; 
@@ -186,15 +190,19 @@
                 font-size: smaller;
                 color: var(--text-light);
             }
+
             /* header */
             body > .header,
             body > .footer {
                 background: #ffffff;
-                position: fixed; 
+                .position: fixed; 
                 width: 100%; calc(100% - calc( 2 * var(--padding)));
                 z-index: 2;
             }
             body > .header {
+                .box-shadow: 0px 0px 10px var(--overlay);
+            }
+            .header .toolbar {
                 box-shadow: 0px 0px 10px var(--overlay);
             }
                 .header .container,
@@ -229,6 +237,7 @@
                     .nav > .button i {
                         font-size: x-large;
                     }
+
                         /* menu */
                         .menu {
                             display: none;
@@ -262,10 +271,12 @@
                                 bottom: var(--padding);
                                 left: calc(0px - var(--padding));
                             }
+
                         /* nav menu */
                         #nav-menu {
                             left: var(--padding);
                         }
+
                         /* user menu */
                         #user-menu {
                             right: var(--padding);
@@ -279,43 +290,22 @@
                             #user-menu .image {
                                 margin: var(--padding) auto;
                             }
-                    .toolbar {}
-                        .cal-days {
-                            display: flex;
-                            flex-direction: row;
-                            justify-content: space-around;
-                            gap: var(--padding);
-                            padding: 0px;
-                        }
-                            .cal-day {
-                                padding: 0px;
-                                width: 100%;
-                            }
-                                .cal-day .day, 
-                                .cal-day .date {
-                                    text-transform: capitalize;
-                                    text-align: center;
-                                }
-                                .cal-day .date {
-                                    margin: 0 auto;
-                                    width: 1.3em;
-                                    height: 1.3em;
-                                    font-size: x-large;
-                                }
-                                .cal-day .active {
-                                    background: var(--user-color);
-                                    border-radius: 50%;
-                                    color: var(--main-color);
-                                }
+
             /* content */
-            .content {
-                height: 100%;
+            body > .content {
                 background: red;
+                flex: 1;
             }
-                .container {}
-                    .page {}
+                body > .content > .container {
+                    padding: 0px;
+                }
+                body > .content > .container > .page {
+                    padding: 0px;
+                    transition: 0.2s;
+                }
                         .article {}
-            /* footer */
+
+                        /* footer */
             body > .footer {
                 bottom: 0px;
                 box-shadow: 0px 0px 10px var(--overlay);
@@ -329,6 +319,11 @@
                     }
                     .footer .button .label {
                     }
+                .footer .nav .active * {
+                    color: var(--user-color);
+                    opacity: 1;
+                    transition: 0.2s;
+                }
 
             div {.background-color: #00000011;}
         </style>
@@ -336,20 +331,49 @@
             $(document).ready(function(){
                 // get padding
                 $padding = $('#nav-button').css('padding');
+
                 // nav button click
-                $('.nav .button').on('click', function(){
+                $('.header .nav .button').on('click', function(){
                     $('.menu').hide();
                     $('.overlay').fadeIn();
                     $('body').addClass('fixed');
                     $(this).next('.menu').css('top', $(this).outerHeight() + $padding);
                     $(this).next('.menu').slideToggle();
                 });
+
                 // overlay
                 $('.overlay').click(function(){
                     $('.overlay').fadeOut();
                     $('body').removeClass('fixed');
                     $('.menu').slideUp();
                 });
+
+                // footer nav get page
+                // load page 1
+                loadPage(1);
+
+                // on button clicked
+                $('.footer .button').on('click', function() {
+                    // get which page to load
+                    var button = $(this).attr('id').slice(-1);
+                    // load page
+                    loadPage(button);
+                });
+
+                // function for loading page
+                function loadPage(button) {
+                    // remove activate old button
+                    $('.footer .button').removeClass('active');
+                    // add active new button
+                    $('.footer #nav-button-' + button).addClass('active');
+                    // fadeout old content
+                    $('.content .container').fadeOut('fast', function() {
+                        // switch pages
+                        $('.page').hide();
+                        $('#page-' + button).show();
+                        $('.content .container').show();
+                    });
+                };
             });
         </script>
     </head>
@@ -392,72 +416,30 @@
                         <div class="button"><i class="<?= $fa ?> fa-arrow-right-from-bracket"></i><label>afmelden</label></div>
                     </div>
                 </div>
-                <div class="toolbar">
-                    <div class="cal-days">
-                        <?php for ($i=0; $i<=6; $i++) { ?>
-                            <div class="cal-day">
-                                <div class="day"><?php echo substr($days[$user_info[$user_id]['locale']][$i], 0, 2); ?></div>
-                                <div class="date <?php if(date('N') == $i +1) { echo 'active'; } ?>"><?php echo date('d', strtotime($year.'W'.$week.$i+1)); ?></div>
-                            </div>
-                        <?php } ?>
-                    </div>
-                </div>
             </div>
         </div>
         <!-- content -->
         <div class="content">
             <div class="container">
                 <!-- page 1 -->
-                <div class="page" id="page1">
-                    <!-- article 1 -->
-                    <div class="article" id="article1">
-                        <div class="image"></div>
-                        <div class="title"></div>
-                        <div class="subtitle"></div>
-                        <div class="text"></div>
-                        <div class="buttons"></div>
-                    </div>
-                    <!-- article 2 -->
-                    <div class="article" id="article2">
-                        <div class="image"></div>
-                        <div class="title"></div>
-                        <div class="subtitle"></div>
-                        <div class="text"></div>
-                        <div class="buttons"></div>
-                    </div>
+                <div class="page" id="page-1">
+                    <?php include 'weekplanner.php' ?>
                 </div>
                 <!-- page 2 -->
-                <div class="page" id="page2">
-                    <!-- article 3 -->
-                    <div class="article" id="article3">
-                        <div class="image"></div>
-                        <div class="title"></div>
-                        <div class="subtitle"></div>
-                        <div class="text"></div>
-                        <div class="buttons"></div>
-                    </div>
-                    <!-- article 4 -->
-                    <div class="article" id="article4">
-                        <div class="image"></div>
-                        <div class="title"></div>
-                        <div class="subtitle"></div>
-                        <div class="text"></div>
-                        <div class="buttons"></div>
-                    </div>
+                <div class="page" id="page-2">
+                    <?php include 'wallet.php' ?>
                 </div>
             </div>
         </div>
         <!-- footer -->
         <div class="footer">
             <div class="container">
-                <!-- toolbar -->
-                <div class=toolbar"></div>
                 <!-- nav -->
                 <div class="nav">
-                    <div class="button" id="nav-button"><i class="fas fa-calendar-days"></i><label>Weekplanner</label></div>
-                    <div class="button" id="nav-button"><i class="fas fa-coin"></i><label>Portemonee</label></div>
-                    <div class="button" id="nav-button"><i class="fas fa-piggy-bank"></i><label>Sparen</label></div>
-                    <div class="button" id="nav-button"><i class="fas fa-clipboard-list"></i><label>Regels</label></div>
+                    <div class="button" id="nav-button-1"><i class="fas fa-calendar-days"></i><label>Weekplanner</label></div>
+                    <div class="button" id="nav-button-2"><i class="fas fa-coin"></i><label>Portemonee</label></div>
+                    <div class="button" id="nav-button-3"><i class="fas fa-piggy-bank"></i><label>Sparen</label></div>
+                    <div class="button" id="nav-button-4"><i class="fas fa-clipboard-list"></i><label>Regels</label></div>
                 </div>
             </div>
         </div>
