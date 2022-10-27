@@ -159,6 +159,7 @@
                 background: #ffffff;
                 border-radius: var(--padding);
                 width: 100%;
+                text-align: center;
             }
             .button:hover {
                 filter: brightness(95%);
@@ -190,6 +191,63 @@
                 font-size: smaller;
                 color: var(--text-light);
             }
+
+            /* menu */
+            .menu {
+                display: none;
+                position: absolute;
+                border: 1px solid var(--border);
+                border-radius: var(--padding);
+                min-width: 200px;
+                background: var(--main-color);
+                z-index: 10;
+                box-shadow: 0px 0px 10px var(--overlay);
+            }
+            .menu .title {
+                font-size: medium;
+                color: var(--text);
+                opacity: 0.5;
+            }
+            .menu .button {
+                width: auto;
+                text-align: left;
+            }
+            .menu i {
+                opacity: 0.5;
+                margin-right: var(--padding);
+            }
+                .menu > .active {
+                    filter: brightness(97.5%);
+                }
+                .menu > .active:before {
+                    content: '';
+                    position: absolute;
+                    border-left: calc(var(--padding) / 2) solid var(--user-color);
+                    width: 100%;
+                    height: calc(100% - var(--padding) - var(--padding));
+                    top: var(--padding);
+                    bottom: var(--padding);
+                    left: calc(0px - var(--padding));
+                }
+
+            /* nav menu */
+            #nav-menu {
+                left: var(--padding);
+            }
+
+            /* user menu */
+            #user-menu {
+                right: var(--padding);
+            }
+                #user-menu .header {
+                    text-align: center;
+                }
+                    #user-menu .header .title {
+                        color: var(--user-color);
+                    }
+                #user-menu .image {
+                    margin: var(--padding) auto;
+                }
 
             /* header */
             body > .header,
@@ -238,59 +296,6 @@
                         font-size: x-large;
                     }
 
-                        /* menu */
-                        .menu {
-                            display: none;
-                            position: absolute;
-                            border: 1px solid var(--border);
-                            border-radius: var(--padding);
-                            min-width: 200px;
-                            background: var(--main-color);
-                            z-index: 10;
-                            box-shadow: 0px 0px 10px var(--overlay);
-                        }
-                        .menu .title {
-                            font-size: medium;
-                            color: var(--text);
-                            opacity: 0.5;
-                        }
-                        .menu i {
-                            opacity: 0.5;
-                            margin-right: var(--padding);
-                        }
-                            .menu > .active {
-                                filter: brightness(97.5%);
-                            }
-                            .menu > .active:before {
-                                content: '';
-                                position: absolute;
-                                border-left: calc(var(--padding) / 2) solid var(--user-color);
-                                width: 100%;
-                                height: calc(100% - var(--padding) - var(--padding));
-                                top: var(--padding);
-                                bottom: var(--padding);
-                                left: calc(0px - var(--padding));
-                            }
-
-                        /* nav menu */
-                        #nav-menu {
-                            left: var(--padding);
-                        }
-
-                        /* user menu */
-                        #user-menu {
-                            right: var(--padding);
-                        }
-                            #user-menu .header {
-                                text-align: center;
-                            }
-                                #user-menu .header .title {
-                                    color: var(--user-color);
-                                }
-                            #user-menu .image {
-                                margin: var(--padding) auto;
-                            }
-
             /* content */
             body > .content {
                 background: red;
@@ -337,8 +342,9 @@
                     $('.menu').hide();
                     $('.overlay').fadeIn();
                     $('body').addClass('fixed');
-                    $(this).next('.menu').css('top', $(this).outerHeight() + $padding);
-                    $(this).next('.menu').slideToggle();
+                    $('.menu').css('top', $(this).outerHeight() + $padding);
+                    $menu = $(this).attr('id').slice(0, -7);
+                    $('#' + $menu + '-menu').slideToggle();
                 });
 
                 // overlay
@@ -380,41 +386,42 @@
     <body>
         <!-- overlay -->
         <div class="overlay"></div>
+        <!-- submenus -->
+        <div class="menu" id="nav-menu">
+            <div class="title">main</div>
+            <div class="button active"><i class="<?= $fa ?> fa-home"></i><label>page1</label></div>
+            <div class="button"><i class="<?= $fa ?> fa-cube"></i><label>page2</label></div>
+            <div class="button"><i class="<?= $fa ?> fa-key"></i><label>page3</label></div>
+            <div class="hr"></div>
+            <div class="title">account</div>
+            <div class="button"><i class="<?= $fa ?> fa-user"></i><label>public profile</label></div>
+            <div class="button"><i class="<?= $fa ?> fa-cog"></i><label>account</label></div>
+            <div class="button"><i class="<?= $fa ?> fa-bell"></i><label>notifications</label></div>
+            <div class="hr"></div>
+            <div class="button"><i class="<?= $fa ?> fa-arrow-right-from-bracket"></i><label>afmelden</label></div>
+        </div>
+        <div class="menu" id="user-menu">
+            <div class="header">
+                <div class="image round-image" style="background-image: url('images/<?php echo $user_info[$user_id]['username'] ?>.jpg')"></div>
+                <div class="title"><?php echo $user_info[$user_id]['first_name'] . ' ' . $user_info[$user_id]['middle_name'] . ' ' . $user_info[$user_id]['last_name']?></div>
+                <div class="subtitle"><?php echo $user_info[$user_id]['email'] ?></div>
+            </div>
+            <div class="hr"></div>
+            <div class="title">account</div>
+            <div class="button"><i class="<?= $fa ?> fa-user"></i><label>profiel</label></div>
+            <div class="button"><i class="<?= $fa ?> fa-cog"></i><label>account</label></div>
+            <div class="button"><i class="<?= $fa ?> fa-paint-brush"></i><label>uiterlijk</label></div>
+            <div class="button"><i class="<?= $fa ?> fa-bell"></i><label>notificaties</label></div>
+            <div class="hr"></div>
+            <div class="button"><i class="<?= $fa ?> fa-arrow-right-from-bracket"></i><label>afmelden</label></div>
+        </div>
         <!-- header -->
         <div class="header">
             <div class="container">
                 <div class="nav">
                     <div class="button" id="nav-button"><i class="fas fa-bars"></i></div>
-                    <div class="menu" id="nav-menu">
-                        <div class="title">main</div>
-                        <div class="button active"><i class="<?= $fa ?> fa-home"></i><label>page1</label></div>
-                        <div class="button"><i class="<?= $fa ?> fa-cube"></i><label>page2</label></div>
-                        <div class="button"><i class="<?= $fa ?> fa-key"></i><label>page3</label></div>
-                        <div class="hr"></div>
-                        <div class="title">account</div>
-                        <div class="button"><i class="<?= $fa ?> fa-user"></i><label>public profile</label></div>
-                        <div class="button"><i class="<?= $fa ?> fa-cog"></i><label>account</label></div>
-                        <div class="button"><i class="<?= $fa ?> fa-bell"></i><label>notifications</label></div>
-                        <div class="hr"></div>
-                        <div class="button"><i class="<?= $fa ?> fa-arrow-right-from-bracket"></i><label>afmelden</label></div>
-                    </div>
                     <div class="title"><?= $title ?></div>
                     <div class="button" id="user-button"><i class="fas fa-user"></i></div>
-                    <div class="menu" id="user-menu">
-                        <div class="header">
-                            <div class="image round-image" style="background-image: url('images/<?php echo $user_info[$user_id]['username'] ?>.jpg')"></div>
-                            <div class="title"><?php echo $user_info[$user_id]['first_name'] . ' ' . $user_info[$user_id]['middle_name'] . ' ' . $user_info[$user_id]['last_name']?></div>
-                            <div class="subtitle"><?php echo $user_info[$user_id]['email'] ?></div>
-                        </div>
-                        <div class="hr"></div>
-                        <div class="title">account</div>
-                        <div class="button"><i class="<?= $fa ?> fa-user"></i><label>profiel</label></div>
-                        <div class="button"><i class="<?= $fa ?> fa-cog"></i><label>account</label></div>
-                        <div class="button"><i class="<?= $fa ?> fa-paint-brush"></i><label>uiterlijk</label></div>
-                        <div class="button"><i class="<?= $fa ?> fa-bell"></i><label>notificaties</label></div>
-                        <div class="hr"></div>
-                        <div class="button"><i class="<?= $fa ?> fa-arrow-right-from-bracket"></i><label>afmelden</label></div>
-                    </div>
                 </div>
             </div>
         </div>
