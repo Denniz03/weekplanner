@@ -4,7 +4,7 @@
     $title = 'Weekplanner';
     $today = date('d-m-Y');
     $version = 'Versie 2.0';
-    $days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday');
+    $days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
     $year = date('Y');
     $week = date('W');
 
@@ -44,7 +44,7 @@
         ['friday', 'bread-loaf', 'chalkboard-teacher', 'gamepad', 'tshirt', 'running', 'bread-loaf', 'gamepad', 'shapes', 'utensils', 'dog', 'shower', 'bed-alt'],
         ['saturday', 'tshirt', 'toothbrush', 'bread-loaf', 'car', 'female', 'car', 'house', 'shapes', 'utensils', 'dog', 'toothbrush', 'bed-alt'],
         ['sunday', 'gamepad', 'bread-loaf', 'tv', 'bread-loaf', 'tshirt', 'dog', 'shapes', 'shapes', 'utensils', 'dog', 'shower', 'bed'],
-    );
+    ];
 
     // COLOR
     $red = '225, 0, 0';
