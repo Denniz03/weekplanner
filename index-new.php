@@ -1,7 +1,7 @@
 <?php
     $title = 'KiddoApp';
     $today = date('d-m-Y');
-    $version = 'Versie 2.0';
+    $version = 'Versie 2.1';
     $days = [
         'nl' => ['maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag', 'zondag'],
         'en' => ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
